@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Elementary. A CSS workflow for mimicking element queries. [c]2014 @scottjehl, @filamentgroup. MIT license.</title>
+	<script src="../src/elementary.js"></script>
+	<script>
+		window.addEventListener( "load", window.elementary, false );
+		window.addEventListener( "resize", window.elementary, false );
+	</script>
+	<style>
+		.mod:before {
+		   display: none;
+		}
+
+		/* set up some element query breakpoints for mod-foo */
+		.mod-foo:before {
+		  content: "300 410 500";
+		}
+		.mod-foo {
+		  background: green;
+		  color: #fff;
+		  padding: 20px;
+		}
+		.mod-foo[data-minwidth~="300"] {
+		  background: blue;
+		}
+		.mod-foo[data-minwidth~="410"] {
+		  background: red;
+		}
+		.mod-foo[data-minwidth~="500"] {
+		  background: gray;
+		}
+
+		/* demo styles for the layout surrounding the element query element */
+		body {
+		margin: 30px;
+		font-family: sans-serif;
+		}
+		.example-layout {
+		  background: tan;
+		}
+		@media (min-width: 350px){
+		  .example-layout {
+		    padding-right: 25%;
+		  }
+		}
+		@media (min-width: 550px){
+		  .example-layout {
+		    padding-right: 50%;
+		  }
+		}
+	</style>
+</head>
+<body>
+	<h1>Elementary.</h1>
+	<p>A CSS workflow for mimicking element queries. [c]2014 @scottjehl, @filamentgroup. MIT license.</p>
+
+	<div class="example-layout">
+	  <p class="mod mod-foo">The background of this element will change depending on its own width</p>
+	</div>
+
+	 <h2> How to</h2>
+
+	<ol>
+	 <li>Give an element a class of <code>mod</code> and whatever other classes you might need for styling it.
+<pre><code>
+&lt;p class="mod mod-foo"&gt;...&lt;/p&gt;
+</code></pre>
+	</li>
+	<li>Claim that element’s potential element query breakpoints in your CSS by setting its <code>:before</code> selector’s <code>content</code> property value with space-separated numbers, like this:
+<pre><code>
+.mod-foo:before {
+   content: "300 450 620";
+}
+</code></pre>
+	</li>
+	<li>For all elements with this "mod" class, a little JavaScript will set and maintain (on resize) a <code>data-minwidth</code> attribute on them containing a subset of the widths that are less-than-or-equal-to the element’s own width. You can use that to write selectors like this, which says, “if the data-minwidth attribute contains the 450”:
+<pre><code>
+.mod[data-minwidth~="450"] {
+  background: blue;
+}
+</code></pre>
+	</li>
+	</ol>
+
+	<p>That’s about it. Here’s the CSS for the sample element on this page:</p>
+<pre><code>
+.mod-foo:before {
+  content: "300 410 500";
+}
+.mod-foo {
+  background: green;
+  color: #fff;
+  padding: 20px;
+}
+.mod-foo[data-minwidth~="300"] {
+  background: blue;
+}
+.mod-foo[data-minwidth~="410"] {
+  background: red;
+}
+.mod-foo[data-minwidth~="500"] {
+  background: gray;
+}
+</code></pre>
+
+
+</body>
+</html>
