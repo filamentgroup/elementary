@@ -31,7 +31,7 @@
 		.mod-foo[data-minwidth~="500"] {
 		  background: gray;
 		}
-		.mod-foo[data-maxwidth~="499"] {
+		.mod-foo[data-minwidth~="300"][data-maxwidth~="499"] {
 		  font-weight: bold;
 		}
 
@@ -92,6 +92,12 @@
   font-weight: bold;
 }
 </code></pre>
+These are less useful on their own, especially if you're working mobile first anyway, but when combined with min-width queries they can give you a level of precision closer to that of native media queries, e.g.:
+<pre><code>
+.mod[data-minwidth~="300"][data-maxwidth~="449"] {
+  font-weight: bold;
+}
+</code></pre>
 	</li>
 	</ol>
 
@@ -114,7 +120,7 @@
 .mod-foo[data-minwidth~="500"] {
   background: gray;
 }
-.mod-foo[data-maxwidth~="499"] {
+.mod-foo[data-minwidth~="300"][data-maxwidth~="499"] {
   font-weight: bold;
 }
 </code></pre>
