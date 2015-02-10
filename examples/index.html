@@ -31,6 +31,9 @@
 		.mod-foo[data-minwidth~="500"] {
 		  background: gray;
 		}
+		.mod-foo[data-maxwidth~="499"] {
+		  font-weight: bold;
+		}
 
 		/* demo styles for the layout surrounding the element query element */
 		body {
@@ -83,6 +86,13 @@
 }
 </code></pre>
 	</li>
+	<li>The script will also maintain a <code>data-maxwidth</code> attribute on the elements which works from the same breakpoints, so you can write selectors to target the element when it's <em>narrower</em> than your chosen breakpoint, e.g.:
+<pre><code>
+.mod[data-maxwidth~="449"] {
+  font-weight: bold;
+}
+</code></pre>
+	</li>
 	</ol>
 
 	<p>That’s about it. Here’s the CSS for the sample element on this page:</p>
@@ -103,6 +113,9 @@
 }
 .mod-foo[data-minwidth~="500"] {
   background: gray;
+}
+.mod-foo[data-maxwidth~="499"] {
+  font-weight: bold;
 }
 </code></pre>
 
