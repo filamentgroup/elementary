@@ -12,14 +12,19 @@
 				breakpoints = w.getComputedStyle( mod, ":before" ).getPropertyValue( "content" ),
 				widths = breakpoints.replace(/[^\d ]/g,"").split( " "),
 				modWidth = mod.clientWidth,
-				minWidths = [];
+				minWidths = [],
+				maxWidths = [];
 
 			for( var i = 0; i < widths.length; i++ ){
 				if( w.parseFloat( widths[ i ] ) <= modWidth ){
 					minWidths.push( widths[ i ] );
 				}
+				else {
+					maxWidths.push( w.parseInt( widths[ i ] ) - 1 );
+				}
 			}
 			mod.setAttribute( "data-minwidth", minWidths.join( " " ) );
+			mod.setAttribute( "data-maxwidth", maxWidths.join( " " ) );
 		}
 	};
 
